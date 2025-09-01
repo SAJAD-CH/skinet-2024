@@ -14,6 +14,7 @@ builder.Services.AddDbContext<StoreContext>(opt =>
 });
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>(); //IproductRepository call aakumbol ProductRepository anne work aakal
+builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>)); //Generic repo aayad konnd eede type aanne parayan patilla so
 
 var app = builder.Build();
 
