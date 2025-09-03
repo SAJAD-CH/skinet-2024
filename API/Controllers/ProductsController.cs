@@ -1,4 +1,5 @@
 using System;
+using API.RequestHelpers;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
@@ -10,24 +11,28 @@ using Microsoft.Identity.Client;
 namespace API.Controllers;
 
 
-[ApiController]
-[Route("api/[controller]")]
-public class ProductsController(IGenericRepository<Product> repo) : ControllerBase
+
+public class ProductsController(IGenericRepository<Product> repo) : BaseApiController
 {
 
-   
+
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts(string? brand, string? type, string? sort)
+    public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts([FromQuery] ProductSpecParams specParams)
     {
-        var spec = new ProductSpecification(brand, type,sort);
+        var spec = new ProductSpecification(specParams);
         // This calls ProductSpecification constructor.
 
         // That constructor passes the filtering condition to BaseSpecification.
 
-        var products = await repo.ListAsync(spec);
- 
+        //old method
+        // var products = await repo.ListAsync(spec);
+        // var count = await repo.CountAsync(spec);
+        // var pagination = new Pagination<Product>(specParams.PageIndex, specParams.PageSize, count, products);
+        // return Ok(pagination); //ok use aakunnad return kittunna list  200 response and object aaki forntielkk kodkan
 
-        return Ok(products); //ok use aakunnad return kittunna list  200 response and object aaki forntielkk kodkan
+        //newmethod after creting baseapicontroller
+        return await CreatePagedResult(repo, spec, specParams.PageIndex, specParams.PageIndex);
+
     }
 
     [HttpGet("{id:int}")] //api/products/id

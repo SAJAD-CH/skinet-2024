@@ -74,4 +74,13 @@ public class GenericRepository<T>(StoreContext context) : IGenericRepository<T> 
     {
         return SpecificationEvaluator<T>.GetQuery<T,TResult>(context.Set<T>().AsQueryable(), spec);
     }
+
+    public async Task<int> CountAsync(ISpecification<T> spec)
+    {
+        var query = context.Set<T>().AsQueryable();
+
+        query = spec.ApplyCriteria(query); //nammalk motham db productinte count alla vendad filter cheyda productinte count annu so again filter cheyyan use aakunnad 
+
+        return await query.CountAsync();
+    }
 }
