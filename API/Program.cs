@@ -1,3 +1,4 @@
+using API.Middleware;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -14,9 +15,15 @@ builder.Services.AddDbContext<StoreContext>(opt =>
 });
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>(); //IproductRepository call aakumbol ProductRepository anne work aakal
-builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>)); //Generic repo aayad konnd eede type aanne parayan patilla so
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>)); //Generic repo aayad konnd eede type aanne parayan patilla so
+builder.Services.AddCors();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200", "https://localhost:4200"));
+//ith kodthale 4200ilne verunna request api server accept aakullu
 
 app.MapControllers();
 
