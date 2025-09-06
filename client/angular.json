@@ -7,7 +7,11 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "type":"component"
+        },
+        "@schematics/angular:service": {
+          "type":"service"
         }
       },
       "root": "",
@@ -31,7 +35,8 @@
             ],
             "styles": [
               "src/tailwind.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/@angular/material/prebuilt-themes/azure-blue.css"
             ]
           },
           "configurations": {
