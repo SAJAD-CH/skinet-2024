@@ -67,7 +67,7 @@ public class GenericRepository<T>(StoreContext context) : IGenericRepository<T> 
 
     private IQueryable<T> ApplySpecification(ISpecification<T> spec)
     {
-        return SpecificationEvaluator<T>.GetQuery(context.Set<T>().AsQueryable(), spec);
+        return SpecificationEvaluator<T>.GetQuery(context.Set<T>().AsQueryable(), spec);//context.set il  table undakum, specil specum
     }
 
     private IQueryable<TResult> ApplySpecification<TResult>(ISpecification<T,TResult> spec) //Tresult(string) return aakan ayt use aakunnad ee same method 

@@ -1,6 +1,11 @@
-@import "tailwindcss";
+@import "tailwindcss" important; 
+/* imp kodthad ang mat themine tailwind overcome cheyyu */
 
 .container {
     @apply mx-auto max-w-screen-2xl px-6
 } 
 /* ee container kodkunnad data left endilne korch maari nikkan */
+
+.text-primary{
+    @apply text-blue-700
+}
