@@ -69,7 +69,10 @@ export class ShopComponent implements OnInit {
       this.products=res
       console.log("prdocus",this.products);
       
-    })
+    },
+      (err) => {
+        console.error("Error fetching products:", err);
+      })
   }
 
   handlePageEvent(event:PageEvent){
