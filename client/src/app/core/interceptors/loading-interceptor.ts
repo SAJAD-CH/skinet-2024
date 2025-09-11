@@ -9,7 +9,7 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
   busyService.busy()
 
   return next(req).pipe(  //api response delay aakunnad for testing the loading cases(internetil ittal latenceyokke nokkan)
-    delay(500),
+    // delay(500),
     finalize(()=>busyService.idle())
   );
 };
