@@ -68,7 +68,7 @@ public class AccountController(SignInManager<AppUser> signInManager) : BaseApiCo
         });
     }
 
-    [HttpGet]
+    [HttpGet("auth-status")]
     public ActionResult GetAuthState()
     {
         return Ok(new { IsAuthenticated = User.Identity?.IsAuthenticated ?? false });
@@ -86,8 +86,8 @@ public class AccountController(SignInManager<AppUser> signInManager) : BaseApiCo
 
     public async Task<ActionResult<Address>> CreateOrUpdateAddress(AddressDto addressDto)
     {
-        var user = await signInManager.UserManager.GetUserByEmailWithAddress(User);
-
+        var user = await signInManager.UserManager.GetUserByEmailWithAddress(User); //get full details of the user including his address
+ 
         if (user.Address == null)
         {
             user.Address = addressDto.ToEntity(); //converts Dtoformat  to entity so that it can save to db

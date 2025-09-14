@@ -40,7 +40,7 @@ app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrig
 //ith kodthale 4200ilne verunna request api server accept aakullu
 
 app.MapControllers();
-app.MapGroup("api").MapIdentityApi<AppUser>(); // api/login  ==ith pole work aakan
+app.MapGroup("api").MapIdentityApi<AppUser>(); // api/login  ingane kodthal  login function onnum controller ezhudenda inbuilt aayt ullad edkum , reginokke nammakk updation ullad konnd ezhudennam
 
 //ee try catch use aakunnad seed data dbyilekk add aakan(seed data product.json)
 try
