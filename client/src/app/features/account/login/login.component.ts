@@ -44,7 +44,6 @@ export class LoginComponent {
 
 
   onSubmit(){
-    debugger
     this.accountService.login(this.loginForm.value)
     .subscribe((res)=>{
       this.accountService.getUserInfo().subscribe();

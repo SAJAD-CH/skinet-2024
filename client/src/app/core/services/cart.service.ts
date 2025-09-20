@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Cart, CartItem } from '../../shared/Models/cart';
 import { Product } from '../../shared/Models/product';
 import { map } from 'rxjs';
+import { DeliveryMethod } from '../../shared/Models/deliveryMethod';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +20,14 @@ export class CartService {
   })
   //cartil ende update aayalum appo thanne itemcountile computed work aakum and namma kodtha logic pole quantity ennam eduth verum
 
+  selectedDelivery = signal<DeliveryMethod | null>(null);//ithil change vanna thanne totals change aakum
+
   totals = computed(() => {
     const cart = this.cart()
+    const delivery = this.selectedDelivery();
     if (!cart) return null
     const subtotal = cart.items.reduce((sum, item) => sum + item.price * item.quantity, 0)
-    const shipping = 0
+    const shipping = delivery ? delivery.price :0
     const discount = 0
     return {
       subtotal,

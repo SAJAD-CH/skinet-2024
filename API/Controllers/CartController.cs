@@ -8,6 +8,8 @@ namespace API.Controllers;
 public class CartController(IcartService cartService) : BaseApiController
 {
 
+
+    //product pole sql db alla redis db annu so repo onnum venda direct cartservicilne redis db connect aakum
     [HttpGet]
     public async Task<ActionResult<ShoppingCart>> GetCartById(string id)
     {

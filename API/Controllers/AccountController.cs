@@ -12,9 +12,17 @@ namespace API.Controllers;
 
 public class AccountController(SignInManager<AppUser> signInManager) : BaseApiController
 {
-
+    //here identity annu use cheyunnad for login register etc
+    //What is ASP.NET Core Identity?
+    //ASP.NET Core Identity is Microsoft’s built-in authentication and authorization system.
+    //It helps you manage users, passwords, roles, tokens, login/logout, etc. without building everything from scratch.
+    //When you add Identity, you can:
+    //Register users (/api/account/register)
+    //Log in (/api/account/login) → API returns a JWT token
+    //Protect endpoints ([Authorize]) so only logged-in users can access them.
+    //Store user accounts in your database.
     [HttpPost("register")]
-
+   
     public async Task<IActionResult> Register(RegisterDto registerDto)
     {
         //registerdtoyilekk frontilne data verum and athine appuser aakennam bcoz AppUser inherits from IdentityUser → it is the Entity Framework Core entity that maps directly to the AspNetUsers table in the database.

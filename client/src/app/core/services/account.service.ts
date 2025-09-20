@@ -2,7 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Address, User } from '../../shared/Models/User';
-import { map } from 'rxjs';
+import { map, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +48,14 @@ export class AccountService {
   }
 
   updateAddress(address : Address){
-      return this.http.post(this.baseUrl + 'account/address', address)
+      return this.http.post(this.baseUrl + 'account/address', address).pipe(
+        tap(()=>{
+          this.currentUser.update(user => { //ivde nammall pass cheyunna address thanne signalil update akunne
+            if(user) user.address = address;
+            return user;
+          })
+        })
+      )
   }
 
   getAuthState(){
